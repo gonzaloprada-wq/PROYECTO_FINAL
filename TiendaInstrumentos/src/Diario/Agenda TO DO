@@ -1,0 +1,27 @@
+TO DO:
+------
+
+=====================================================================================
+11/05/26-He realizado el código de las clases Personal->Empleados->deTienda
+						                 ->deAlmacen
+						       ->Jefe
+
+PROXIMO DIA:
+
+12/05/26-Su clase gestora. 
+	-Realizar pruebas de la jerarquía personal
+	-JavaDoc y comentarios
+====================================================================================
+12/05/26-He realizado código gestoria (incompleto)
+
+PROXIMO DIA:
+INVESTIGAR SINGLETON
+	-Terminar clase gestora. 
+	-Realizar pruebas de la jerarquía personal
+	-JavaDoc y comentarios
+====================================================================================
+14/05/26-He realizado todo el código y pruebas, además del javaDoc
+
+PROXIMO DIA:
+	-Investigar sobre subidas de notas
+	-Empezar Codigo de Inventario

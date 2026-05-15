@@ -1,0 +1,2 @@
+22222222B - 622222222 - Pedro - Ruiz - Calle Sol 5 - deAlmacen - 800.0 - 30 - false - false - xx-xx-xxxx - true - 0 - 0 - 0.0
+22222322B - 622122222 - Pedro - Ruiz - Calle Sol 5 - deAlmacen - 800.0 - 30 - false - false - xx-xx-xxxx - true - 0 - 0 - 0.0

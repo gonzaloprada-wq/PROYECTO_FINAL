@@ -10,6 +10,8 @@ public class dePercusion extends Instrumento {
 		setNecesitaBaqueta(necesitaBaqueta);
 	}
 
+
+	
 	public boolean isNecesitaBaqueta() {
 		return necesitaBaqueta;
 	}

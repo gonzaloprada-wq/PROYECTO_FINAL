@@ -7,6 +7,8 @@ public abstract class Instrumento extends deCatalogo{
 		super(serialNumber, marca, nombre, modelo, precio, fechaAdquisicion, enCaja, numeroAlmacen, numeroPalet);
 	}
 	
+
+	
 	public abstract void imprimirAviso();
 	
 	

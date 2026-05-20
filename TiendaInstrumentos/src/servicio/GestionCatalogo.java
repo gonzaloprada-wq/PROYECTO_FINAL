@@ -38,8 +38,11 @@ public class GestionCatalogo {
 	// AQUI EL HE HECHO EL CRUD
 
 	public void añadirArticulo(deCatalogo articulo) {
+		
 		if (buscarArticulo(articulo.getSerialNumber()) == null) {
+			
 			mapaCatalogo.put(articulo.getSerialNumber(), articulo);
+			
 		}
 	}
 
@@ -56,8 +59,11 @@ public class GestionCatalogo {
 	}
 
 	public void imprimirTodos() {
+		
 		for (deCatalogo articuloActual : mapaCatalogo.values()) {
+			
 			System.out.println(articuloActual.toString());
+			
 		}
 	}
 

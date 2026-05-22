@@ -90,6 +90,7 @@ public abstract class Personal {
 		this.direccion = direccion;
 	}
 
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(dni, telefono);

@@ -117,7 +117,7 @@ public class GestionCatalogo {
 	
 	
 	// Codigo versionado de video canal de youtube "Makigas"
-	public double contarDisponibles() {
+	public Long contarDisponibles() {
  
 		return mapaCatalogo.values().stream()
  
@@ -133,31 +133,34 @@ public class GestionCatalogo {
 	// PERSISTENCIA
  
 	public void guardarDatosCatalogo() {
- 
-		try (BufferedWriter escritor = new BufferedWriter(new FileWriter(FICHERO_CATALOGO))) {
- 
-			for (deCatalogo articuloActual : mapaCatalogo.values()) {
- 
-				if (articuloActual instanceof deCuerda) {
- 
-					escritor.write(lineaDeCuerda((deCuerda) articuloActual));
- 
-				} else if (articuloActual instanceof deViento) {
- 
-					escritor.write(lineaDeViento((deViento) articuloActual));
- 
-				} else if (articuloActual instanceof dePercusion) {
- 
-					escritor.write(lineaDePercusion((dePercusion) articuloActual));
- 
-				}
- 
-			}
-		} catch (IOException e) {
- 
-			System.out.println("Error al guardar el catalogo: " + e.getMessage());
- 
-		}
+
+	    try (BufferedWriter escritor = new BufferedWriter(new FileWriter(FICHERO_CATALOGO))) {
+
+	        for (deCatalogo articuloActual : mapaCatalogo.values()) {
+
+	            if (articuloActual instanceof deCuerda) {
+
+	                escritor.write(lineaDeCuerda((deCuerda) articuloActual));
+
+	            } else if (articuloActual instanceof deViento) {
+
+	                escritor.write(lineaDeViento((deViento) articuloActual));
+
+	            } else if (articuloActual instanceof dePercusion) {
+
+	                escritor.write(lineaDePercusion((dePercusion) articuloActual));
+
+	            }
+
+	            escritor.newLine();
+
+	        }
+
+	    } catch (IOException e) {
+
+	        System.out.println("Error al guardar el catalogo: " + e.getMessage());
+
+	    }
 	}
  
 	// Este bloque return lo ha hecho la inteliencia artificial "Gemini" para el ahorro de tiempo debido a que es un proceso lento y repetitivo

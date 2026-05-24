@@ -1,8 +1,19 @@
 package modelo;
 
 public class deViento extends Instrumento {
-
+	/*
+	 * Clase que representa un instrumento de viento.
+	 * Contiene los datos y avisos que debe tener un comprados sobre el instrumento
+	 * Es extendida por Instrumento
+	 *
+	 * @author Gonzalo Prada
+	 * @version 1.0
+	
+	 */
 	private String material;
+	
+	   /*====================CONSTRUCTORES=======================================================*/
+
 	
 	public deViento(String serialNumber, String marca, String nombre, String modelo, Double precio,
 			String fechaAdquisicion, Boolean enCaja, int numeroAlmacen, int numeroPalet, String material) {
@@ -11,6 +22,8 @@ public class deViento extends Instrumento {
 		setMaterial(material);
 		
 	}
+
+    /*======================  FIN DE LOS CONSTRUCTORES  =============================*/
 
 	
 	public String getMaterial() {
@@ -21,7 +34,13 @@ public class deViento extends Instrumento {
 		this.material = material;
 	}
 
-
+	  /**
+     * Imprime un aviso que se necesita imprimir para el posible comprador
+     * 
+     * @param Ninguno
+     * 
+     * @return void (se imprime por consola)
+     */
 	@Override
 	public void imprimirAviso() {
 
@@ -29,10 +48,10 @@ public class deViento extends Instrumento {
 		
 	}
 
-
-	@Override
-	public String toString() {
-		return "deViento [material=" + material + "]";
+	@Override public String toString() { 
+		
+		return super.toString() + " deViento [Material: " + material + "]"; 
+		
 	}
 	
 	

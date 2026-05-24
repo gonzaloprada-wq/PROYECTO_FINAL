@@ -1,5 +1,13 @@
 package modelo;
 
+/*
+ * Clase abstracta que representa los articulos de catalogo (lo que se vende).
+ * Contiene datos de la ubicacion en el almacén del instrumento
+ *
+ * @author Gonzalo Prada
+ * @version 1.0
+ */
+
 public abstract class deCatalogo extends Articulo{
 
 	protected int numeroAlmacen;
@@ -8,16 +16,19 @@ public abstract class deCatalogo extends Articulo{
 	
 	protected boolean estaReservado=false;
 		
-
+    /*====================CONSTRUCTORES=======================================================*/
+	
 	public deCatalogo(String serialNumber, String marca, String nombre, String modelo, Double precio,
 			String fechaAdquisicion, Boolean enCaja, int numeroAlmacen, int numeroPalet) {
 		super(serialNumber, marca, nombre, modelo, precio, fechaAdquisicion, enCaja);
 		setNumeroAlmacen(numeroAlmacen);
 		setNumeroPalet(numeroPalet);
 	}
-
-
-
+	
+	
+    /*======================     FIN DE LOS CONSTRUCTORES         =============================*/
+	
+	// Gets y sets
 	public int getNumeroAlmacen() {
 		return numeroAlmacen;
 	}
@@ -52,13 +63,20 @@ public abstract class deCatalogo extends Articulo{
 		this.estaReservado = estaReservado;
 	}
 
-
+	/**
+     * Esto imprime una ficha de los datos de los articulos.
+     * 
+     * @param Ninguno.
+     * 
+     * @return Ninguno (se imprime en consola)
+     * 
+     */
 	public void imprimirFicha() {
 		
 	
 			//Diseño de interfaz de los datos del objeto hecho con IA (las lineas dobles)
 		    System.out.println("╔══════════════════════════════╗");
-		    System.out.println("║      DATOS DEL OBJETO       ║");
+		    System.out.println("║      DATOS DEL ART.          ║");
 		    System.out.println("╠══════════════════════════════╣");
 
 		    System.out.println("║ Nº Almacén:    " + getNumeroAlmacen());
@@ -79,15 +97,23 @@ public abstract class deCatalogo extends Articulo{
 		
 	}
 	
-	
-	@Override
-	public String toString() {
-		return super.toString()+"deCatalogo [numeroAlmacen=" + numeroAlmacen + ", numeroPalet=" + numeroPalet + ", estaReservado="
-				+ estaReservado + "]";
-	}
 
 
+		
+	@Override public String toString() { 
+		
+		return super.toString() + " deCatalogo [Almacen=" + numeroAlmacen + " | Palet=" + numeroPalet + 
+				" | Reservado=" + estaReservado + "]"; }
+		
 
+	/**
+     * Esto imprime la localizacion del objeto en el almacen debido a que se encuenta en un catalogo
+     * 
+     * @param Ninguno.
+     * 
+     * @return Ninguno (se imprime en consola)
+     * 
+     */
 	@Override
 	public void imprimirLocalizacion() {
 		

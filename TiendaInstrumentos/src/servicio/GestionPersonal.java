@@ -182,20 +182,20 @@ public class GestionPersonal implements Comparator<Empleados> {
 
 	public void guardarDatosEmpleados() {
 
-		try (BufferedWriter escritor = new BufferedWriter(new FileWriter(FICHERO_EMPLEADOS))) {
+		try (BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(FICHERO_EMPLEADOS))) {
 
 			for (Empleados empleado : mapaEmpleados.values()) {
 
 				if (empleado instanceof deTienda) {
 
-					escritor.write(lineaDeTienda((deTienda) empleado));
+					bufferWriter.write(lineaDeTienda((deTienda) empleado));
 
 				} else if (empleado instanceof deAlmacen) {
 
-					escritor.write(lineaDeAlmacen((deAlmacen) empleado));
+					bufferWriter.write(lineaDeAlmacen((deAlmacen) empleado));
 				}
 
-				escritor.newLine();
+				bufferWriter.newLine();
 
 			}
 
@@ -244,28 +244,33 @@ public class GestionPersonal implements Comparator<Empleados> {
 
 	public void implementarDatosEmpleados() {
 
-		try (BufferedReader lector = new BufferedReader(new FileReader(FICHERO_EMPLEADOS))) {
+	    try (BufferedReader lector = new BufferedReader(new FileReader(FICHERO_EMPLEADOS))) {
 
-			String linea;
+	        String lineaLeida;
 
-			while ((linea = lector.readLine()) != null) {
+	        while ((lineaLeida = lector.readLine()) != null) {
 
-				String[] datosConstructor = linea.split(" - ");
+	            String[] datosDelEmpleado = lineaLeida.split(" - ");
 
-				if (datosConstructor[5].equals("deTienda")) {
+	            // FabricaEmpleados decide si es deTienda o deAlmacen segun la posicion 5
+	            Empleados empleadoCargado = FabricaEmpleados.crear(datosDelEmpleado);
 
-					reconstruirDeTienda(datosConstructor);
+	            if (empleadoCargado != null) {
 
-				} else if (datosConstructor[5].equals("deAlmacen")) {
+	                mapaEmpleados.put(empleadoCargado.getDni(), empleadoCargado);
 
-					reconstruirDeAlmacen(datosConstructor);
+	            } else {
 
-				}
-			}
+	                System.out.println("No se pudo cargar el empleado de la linea: " + lineaLeida);
 
-		} catch (IOException e) {
-			System.out.println("Error al cargar los empleados: " + e.getMessage());
-		}
+	            }
+	        }
+
+	    } catch (IOException e) {
+
+	        System.out.println("Fallo al leer el fichero de empleados: " + e.getMessage());
+
+	    }
 	}
 
 	private void reconstruirDeTienda(String[] datosConstructor) {

@@ -1,9 +1,18 @@
 package modelo;
 
 import java.util.Objects;
-
+/**
+ * Clase abstracta que representa a un Articulo del sistema.
+ * Contiene los datos y comportamientos comunes a todos los Artiuclos/objetos.
+ * Es extendida por dePersonal (solo para el personal)
+ * O por deCatalogo (para su venta)
+ *
+ * @author Gonzalo Prada
+ * @version 1.0
+ */
 public abstract class Articulo {
 
+	
 	protected String serialNumber;
 	
 	protected String marca;
@@ -18,7 +27,7 @@ public abstract class Articulo {
 	
 	protected Boolean enCaja;
 
-	
+	   /*====================CONSTRUCTORES=======================================================*/
 	
 	public Articulo(String serialNumber, String marca, String nombre, String modelo, Double precio,
 			String fechaAdquisicion, Boolean enCaja) {
@@ -38,7 +47,10 @@ public abstract class Articulo {
 		this.enCaja = enCaja;
 		
 	}
+	
+    /*======================     FIN DE LOS CONSTRUCTORES         =============================*/
 
+	///GETS Y SETS
 	public String getSerialNumber() {
 		return serialNumber;
 	}
@@ -95,19 +107,34 @@ public abstract class Articulo {
 		this.enCaja = enCaja;
 	}
 
+	  /**ABSTRACTO
+     * Imprime la localizacion del dicho objeto mediante consola
+     * 
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public abstract void imprimirLocalizacion();
 	
-	@Override
-	public String toString() {
-		return "Articulo [serialNumber=" + serialNumber + ", marca=" + marca + ", nombre=" + nombre + ", modelo="
-				+ modelo + ", precio=" + precio + ", fechaAdquisicion=" + fechaAdquisicion + ", enCaja=" + enCaja + "]";
-	}
+
+	
+	@Override public String toString() { 
+		
+		return "Articulo [SN=" + serialNumber + " | " + marca + " " + nombre + " (" + modelo + ") "
+				+ "| Precio=" + precio + " | Fecha=" + fechaAdquisicion + " | EnCaja=" + enCaja + "]"; }
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(serialNumber);
 	}
-	
+	  /**
+     * Devuelve un boolean (true si es igual o false si no) dependiendo si dos objetos son el mismo
+     * Esto se determina mediante el S/N
+     * 
+     * @param Obj : el objeto que se quiero comprobar si es igual
+     * 
+     * @return boolean: true si es igual, false si no
+     */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

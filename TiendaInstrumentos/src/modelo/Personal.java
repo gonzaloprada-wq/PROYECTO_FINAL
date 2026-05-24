@@ -31,6 +31,20 @@ public abstract class Personal {
 		setDireccion(direccion);
 
 	}
+	
+	public Personal(Personal otro) {
+		
+	    this.dni = otro.dni;
+	    
+	    this.telefono = otro.telefono;
+	    
+	    this.nombre = otro.nombre;
+	    
+	    this.apellido = otro.apellido;
+	    
+	    this.direccion = otro.direccion;
+	    
+	}
 
 	public Personal() {
 
@@ -106,7 +120,7 @@ public abstract class Personal {
 		if (getClass() != obj.getClass())
 			return false;
 		Personal other = (Personal) obj;
-		return Objects.equals(dni, other.dni) || telefono == other.telefono;
+		return Objects.equals(dni, other.dni) || Objects.equals(telefono, other.telefono);
 	}
 
 	public abstract void trabajoRealizado();

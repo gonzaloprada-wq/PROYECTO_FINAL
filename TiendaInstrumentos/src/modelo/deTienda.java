@@ -112,5 +112,13 @@ public class deTienda extends Empleados {
 
 		setDineroVentas(getDineroVentas() + precio);
 	}
+	
+	@Override public String toString() { 
+		
+		return super.toString() + " deTienda [Ventas=" + numeroVentas + " | Total=$" + dineroVentas + "]"; 
+		
+	}
 
+	
+	
 }

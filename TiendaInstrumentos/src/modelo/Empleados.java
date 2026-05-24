@@ -15,25 +15,18 @@ import excepciones.TrabajandoInvalidException;
  */
 public abstract class Empleados extends Personal implements Incrementable {
 
-    // Indica si el empleado tiene seguro contratado
     protected boolean tieneSeguro = false;
 
-    // Dias de vacaciones restantes del empleado, por defecto 30
     protected int diasDeVacacionesRestantes = 30;
 
-    // Salario bruto del empleado, minimo 800
     protected double salarioBruto = 800;
 
-    // Indica si el empleado esta en periodo de prueba
     protected boolean estaDePrueba = false;
 
-    // Fecha de inicio del contrato del empleado
     protected String fechaInicio = "xx-xx-xxxx";
 
-    // Indica si el empleado esta actualmente trabajando
     protected boolean trabajando = true;
 
-    // Numero de dias trabajados por el empleado
     protected int diasTrabajados = 0;
 
     /*====================CONSTRUCTORES=======================================================*/
@@ -47,7 +40,7 @@ public abstract class Empleados extends Personal implements Incrementable {
         super();
     }
 
-    /*======================     FIN DE LOS CONSTRUCTORES         =============================*/
+	    /*======================     FIN DE LOS CONSTRUCTORES         =============================*/
 
     // Gets y sets
     public boolean isTieneSeguro() {
@@ -154,6 +147,8 @@ public abstract class Empleados extends Personal implements Incrementable {
         }
     }
 
+    
+    
     /**
      * Incrementa el trabajo realizado por el empleado segun el tipo de empleado.
      *
@@ -165,4 +160,13 @@ public abstract class Empleados extends Personal implements Incrementable {
      * Imprime una ficha del trabajo realizado por el empleado.
      */
     public abstract void trabajoRealizado();
+
+    
+    @Override public String toString() { 
+    	
+    	return super.toString() + " Empleados [Seguro=" + tieneSeguro + " | Vacaciones=" + diasDeVacacionesRestantes + 
+    			" | Salario=$" + salarioBruto + " | EnPrueba=" + estaDePrueba + " | Inicio=" + fechaInicio + 
+    			" | Trabajando=" + trabajando + " | DíasTrabajados=" + diasTrabajados + "]"; 
+    	
+    }
 }

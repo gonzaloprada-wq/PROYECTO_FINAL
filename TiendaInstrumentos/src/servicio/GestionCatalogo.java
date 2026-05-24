@@ -17,16 +17,31 @@ import modelo.deCatalogo;
 import modelo.deCuerda;
 import modelo.dePercusion;
 import modelo.deViento;
- 
+
+/*CLASE REALIZADA MEDIANTE TUTORIAL DE CANAL DE YOUTUBE: TodoCode*/
+/*
+ * Clase abstracta que representa a un Instrumento del sistema.
+ * Contiene los datos del instrumento
+ * Es extendida por deCatalogo
+ *
+ * @author Gonzalo Prada
+ * @version 1.0
+ */
 public class GestionCatalogo {
  
 	private HashMap<String, deCatalogo> mapaCatalogo = new HashMap<>();
  
 	private static final String FICHERO_CATALOGO = "src/repositorio/catalogo.txt";
- 
+	
+    /*====================CONSTRUCTORES=======================================================*/
+
 	public GestionCatalogo() {
 	}
- 
+	
+    /*======================     FIN DE LOS CONSTRUCTORES         =============================*/
+
+	
+	//gets y sets
 	public HashMap<String, deCatalogo> getMapaCatalogo() {
 		return mapaCatalogo;
 	}
@@ -36,7 +51,13 @@ public class GestionCatalogo {
 	}
  
 	// AQUI EL HE HECHO EL CRUD
- 
+	 /**
+     * Añade a la lista el elemento que decidamos
+     *
+     * @param articulo Elemento que se va a añadir.
+     * 
+     * @return void
+     */
 	public void añadirArticulo(deCatalogo articulo) {
  
 		if (buscarArticulo(articulo.getSerialNumber()) == null) {
@@ -45,19 +66,39 @@ public class GestionCatalogo {
  
 		}
 	}
- 
+	 /**
+     * Elimina de la lista el elemento que decidamos
+     *
+     * @param serialNumber: como es hashmap el tipo de lista, con pasarle el indice (el sn) se puede eliminar
+     * 
+     * @return void
+     */
 	public void eliminarArticulo(String serialNumber) {
  
 		mapaCatalogo.remove(serialNumber);
  
 	}
  
+	 /**
+     * Añade a la lista el elemento que decidamos
+     *
+     * @param articulo Elemento que se va a añadir.
+     * 
+     * @return void
+     */
 	public deCatalogo buscarArticulo(String serialNumber) {
  
 		return mapaCatalogo.get(serialNumber);
  
 	}
  
+	 /**
+     * Imprimimos todos los objetos de un mapa catalago
+     *
+     * @param
+     * 
+     * @return void
+     */
 	public void imprimirTodos() {
  
 		if(getMapaCatalogo().size()!=0) {
@@ -76,6 +117,13 @@ public class GestionCatalogo {
 	}
  
 	// Codigo versionado de video canal de youtube "Makigas"
+	 /**
+     * Imprimimos todos los objetos que se pueden imprimir
+     *
+     * @paran ninguno
+     * 
+     * @return void (se imprime por pantalla)
+     */
 	public void imprimirDisponibles() {
  
 		List<deCatalogo> lista = mapaCatalogo.values().stream()
@@ -96,7 +144,14 @@ public class GestionCatalogo {
  
 	}
  
-	
+	// Codigo versionado de video canal de youtube "Makigas"
+		 /**
+	     * Imprimimos por pantalla el objeto mas caro
+	     *
+	     * @param Ninguno
+	     * 
+	     * @return void (se imrpime por consola)
+	     */
 	public void obtenerMasCaro() {
 
 	    deCatalogo masCaro = mapaCatalogo.values().stream()
@@ -117,6 +172,14 @@ public class GestionCatalogo {
 	
 	
 	// Codigo versionado de video canal de youtube "Makigas"
+
+			 /**
+		     * Cuenta los disponibles mediante un filter
+		     *
+		     * @param Ninguno
+		     * 
+		     * @return long devuelve la cantidad de objetos disponibles (en long debido a que filter count usa ese formato)
+		     */
 	public Long contarDisponibles() {
  
 		return mapaCatalogo.values().stream()
@@ -132,47 +195,90 @@ public class GestionCatalogo {
  
 	// PERSISTENCIA
  
+
+	 /**
+    * 
+    * Esta funcion realiza un guardado de datos de Instrumentos.
+    * Al querer guardar tres tipos diferentes de instrumentos hay que realizar distintas funciones.
+    * Cada una para cada tipo (dentro del codigo mas comentarios)     
+    *     
+    * @param Ninguno
+    * 
+    * @return void
+    */
 	public void guardarDatosCatalogo() {
 
-	    try (BufferedWriter escritor = new BufferedWriter(new FileWriter(FICHERO_CATALOGO))) {
+	    try (BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(FICHERO_CATALOGO))) {
 
 	        for (deCatalogo articuloActual : mapaCatalogo.values()) {
 
+	        	//Realizaremos un if para cada tipo instancia y realizaremos
 	            if (articuloActual instanceof deCuerda) {
-
-	                escritor.write(lineaDeCuerda((deCuerda) articuloActual));
+	            	
+	            	//EJEMPLO DE FUNCIONALIDAD:
+	            	//Realizaremos un casteo a dicho artiuclo a deCuerda escribiendo loque nos de en la funcion lineaDeCuerda
+	            	
+	            	String lineaActual=lineaDeCuerda((deCuerda) articuloActual);
+	            	
+	            	bufferWriter.write(lineaActual);
 
 	            } else if (articuloActual instanceof deViento) {
 
-	                escritor.write(lineaDeViento((deViento) articuloActual));
+	            	String lineaActual=lineaDeViento((deViento) articuloActual);
+	            	
+	            	bufferWriter.write(lineaActual);
 
 	            } else if (articuloActual instanceof dePercusion) {
 
-	                escritor.write(lineaDePercusion((dePercusion) articuloActual));
+	            	String lineaActual=lineaDePercusion((dePercusion) articuloActual);
+	            	
+	            	bufferWriter.write(lineaActual);
 
 	            }
 
-	            escritor.newLine();
+	            bufferWriter.newLine();
 
 	        }
 
-	    } catch (IOException e) {
+	    } catch (Exception e) {
 
-	        System.out.println("Error al guardar el catalogo: " + e.getMessage());
+	        System.out.println("Error: " + e.getMessage());
 
 	    }
 	}
  
-	// Este bloque return lo ha hecho la inteliencia artificial "Gemini" para el ahorro de tiempo debido a que es un proceso lento y repetitivo
+
+	 /**
+	    * Esta funcion realiza una linea de los datos que sin necesidad de saber el tipo se puede saber.
+	    * Se separa mediante " - "   
+	    *     
+	    * @param articulo: es el articulo que se va a añadir mediante lineaArticuloComun
+	    * 
+	    * @param tipo: esta linea no esta dentro de articulo y sigue siendo un dato comun, por lo que hay que añadirlo.
+	    * 
+	    * @return String: devuelve una linea con los datos comunes.
+	    */
 	private String datosComunes(deCatalogo articulo, String tipo) {
  
-		return articulo.getSerialNumber() + " - " + articulo.getMarca() + " - " + articulo.getNombre() + " - "
+		String lineaArticuloComun= articulo.getSerialNumber() + " - " + articulo.getMarca() + " - " + articulo.getNombre() + " - "
 				+ articulo.getModelo() + " - " + articulo.getPrecio() + " - " + articulo.getFechaAdquisicion() + " - "
 				+ articulo.getEnCaja() + " - " + articulo.getNumeroAlmacen() + " - " + articulo.getNumeroPalet() + " - "
 				+ articulo.getEstaReservado() + " - " + tipo;
+		
+		return lineaArticuloComun;
  
 	}
  
+	
+	 /**
+	    * Esta funcion devuelve los datos en formato linea de los datos deCuerda
+	    * Se separa mediante " - "
+	    * Hace referencia a datos comunes para devolver la linea completa  
+	    *     
+	    * @param  articulo: es el objeto que queremos convertir a linea
+	    * 
+	    * @return String: devuelve los datos faltantes de objetos de Cuerda
+	    */
 	private String lineaDeCuerda(deCuerda articulo) {
  
 		String lineaDevolver = datosComunes(articulo, "deCuerda") + " - " + articulo.getNumeroCuerdas() + " - " + articulo.getCalibreCuerdas();
@@ -180,6 +286,17 @@ public class GestionCatalogo {
 		return lineaDevolver;
 	}
  
+	
+	/**
+	    * Esta funcion devuelve los datos en formato linea de los datos deCuerda
+	    * Se separa mediante " - "
+	    * Hace referencia a datos comunes para devolver la linea completa
+	    *    
+	    *     
+	    * @param  articulo: es el objeto que queremos convertir a linea (datos restantes)
+	    * 
+	    * @return String: devuelve los datos faltantes de objetos de Cuerda
+	    */
 	private String lineaDeViento(deViento articulo) {
  
 		String lineaDevolver = datosComunes(articulo, "deViento") + " - " + articulo.getMaterial();
@@ -187,6 +304,15 @@ public class GestionCatalogo {
 		return lineaDevolver;
 	}
  
+		/**
+	    * Esta funcion devuelve los datos en formato linea de los datos dePercusion
+	    * Se separa mediante " - "
+	    * Hace referencia a datos comunes para devolver la linea completa
+	    *     
+	    * @param  articulo: es el objeto que queremos convertir a linea (datos restantes)
+	    * 
+	    * @return String: devuelve los datos faltantes de objetos de Percusion
+	    */
 	private String lineaDePercusion(dePercusion articulo) {
  
 		String lineaDevolver = datosComunes(articulo, "dePercusion") + " - " + articulo.isNecesitaBaqueta();

@@ -21,6 +21,7 @@ import servicio.GestionPersonal;
 public class UIEmpleadosTienda {
 
     private final GestionPersonal gestionPersonal;
+    
     private final Scanner scanner;
 
     /*====================CONSTRUCTORES=======================================================*/
@@ -41,6 +42,7 @@ public class UIEmpleadosTienda {
 
         while (!volver) {
         	//Interfaz del selector hecho con IA (solo lineas, la logica es creada por el autor del proyecto)
+        	
             System.out.println("\n========================================");
             System.out.println("   MENU - EMPLEADOS DE TIENDA");
             System.out.println("========================================");
@@ -56,13 +58,43 @@ public class UIEmpleadosTienda {
             String opcion = scanner.nextLine().trim();
 
             switch (opcion) {
-                case "1": verTodosEmpleadosTienda(); break;
-                case "2": registrarVenta(); break;
-                case "3": ficharEntrada(); break;
-                case "4": ficharSalida(); break;
-                case "5": verTrabajoRealizado(); break;
-                case "0": volver = true; break;
+            
+                case "1":
+
+                	verTodosEmpleadosTienda(); 
+                	
+                		break;
+                		
+                case "2":
+
+                	registrarVenta(); 
+                	
+                	break;
+                	
+                case "3": 
+                	
+                	ficharEntrada();
+                	
+                	break;
+                	
+                case "4":
+                	
+                	ficharSalida();
+                	
+                	break;
+                	
+                case "5": verTrabajoRealizado();
+                
+                break;
+                
+                case "0": 
+                	
+                	volver = true; 
+                	
+                	break;
+                	
                 default:
+                	
                     System.out.println("[!] Opcion no valida.");
             }
         }
@@ -72,24 +104,42 @@ public class UIEmpleadosTienda {
     // OPCIONES DEL MENU
     // ---------------------------------------------------------------
 
+    
+    /**
+     * Esto imprime todos los empleados que pertenezcan a tienda
+     *      * 
+     * @param ninguno
+     * 
+     * @return void
+     */
     private void verTodosEmpleadosTienda() {
-        System.out.println("\n--- Empleados de Tienda ---");
+    	
+        System.out.println("\nEmpleados de Tienda");
+        
         gestionPersonal.filtrarEmpleadosTiendaImprimir();
+        
     }
-
+    /**
+     * Esto registra una venta preguntando sobre el dni de empleado y el precio de la venta
+     * 
+     * @param ninguno
+     * 
+     * @return void
+     * 
+     */
     private void registrarVenta() {
         try {
             System.out.print("DNI del empleado: ");
             String dni = scanner.nextLine().trim();
 
-            Empleados emp = gestionPersonal.buscarEmpleado(dni);
+            Empleados empleadoActual = gestionPersonal.buscarEmpleado(dni);
 
-            if (emp == null) {
+            if (empleadoActual == null) {
                 System.out.println("[!] No se encontro ningun empleado con ese DNI.");
                 return;
             }
 
-            if (!(emp instanceof deTienda)) {
+            if (!(empleadoActual instanceof deTienda)) {
                 System.out.println("[!] El empleado encontrado no es de tienda.");
                 return;
             }
@@ -97,11 +147,11 @@ public class UIEmpleadosTienda {
             System.out.print("Precio del articulo vendido (€): ");
             double precio = Double.parseDouble(scanner.nextLine().trim());
 
-            deTienda empTienda = (deTienda) emp;
-            empTienda.Incrementar(precio);
+            deTienda empleadoTienda = (deTienda) empleadoActual;
+            empleadoTienda.Incrementar(precio);
 
-            System.out.println("[OK] Venta registrada. Ventas totales: " + empTienda.getNumeroVentas()
-                    + " | Dinero generado: " + empTienda.getDineroVentas() + " €");
+            System.out.println("[OK] Venta registrada. Ventas totales: " + empleadoTienda.getNumeroVentas()
+                    + " | Dinero generado: " + empleadoTienda.getDineroVentas() + " €");
 
         } catch (NumberFormatException e) {
             System.out.println("[!] Precio invalido: " + e.getMessage());

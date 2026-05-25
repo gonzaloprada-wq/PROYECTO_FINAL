@@ -19,7 +19,12 @@ import modelo.Empleados;
 import modelo.Jefe;
 import modelo.deAlmacen;
 import modelo.deTienda;
-
+/*
+ * Clase que representa la gestion de los integrantes del personal.
+ *
+ * @author Gonzalo Prada
+ * @version 1.0
+ */
 public class GestionPersonal implements Comparator<Empleados> {
 
 	private LinkedHashMap<String, Empleados> mapaEmpleados = new LinkedHashMap<>();
@@ -27,11 +32,16 @@ public class GestionPersonal implements Comparator<Empleados> {
 	private static final String FICHERO_EMPLEADOS = "src/repositorio/empleados.txt";
 
 	private static final String FICHERO_CONTRASEÑA = "src/recursos/contraseña.txt";
-
+	
+    /*====================CONSTRUCTORES=======================================================*/
+	
 	public GestionPersonal() {
 
 	}
-
+	
+    /*======================   FIN DE LOS CONSTRUCTORES      =============================*/
+	
+	//Gets y Sets
 	public LinkedHashMap<String, Empleados> getMapaEmpleados() {
 
 		return mapaEmpleados;
@@ -43,7 +53,14 @@ public class GestionPersonal implements Comparator<Empleados> {
 		this.mapaEmpleados = mapaEmpleados;
 
 	}
-
+	
+	 /**
+     * Comprueba mediante un scanneo a consola para comprobar si la constraseña añadida es la misma a la que se encuentra guardada
+     *
+     * @param nignuno
+     * 
+     * @return void
+     */
 	public void comprobarContraseña() throws ContrasenaInvalidaException {
 
 		Scanner scanner = new Scanner(System.in);
@@ -57,7 +74,13 @@ public class GestionPersonal implements Comparator<Empleados> {
 			throw new ContrasenaInvalidaException();
 		}
 	}
-
+	 /**
+     * Realiza un cambio de contraseña mediante un escano
+     *
+     * @param articulo Elemento que se va a añadir.
+     * 
+     * @return void
+     */
 	public void cambiarContraseña() {
 
 		Scanner scanner = new Scanner(System.in);
@@ -80,21 +103,36 @@ public class GestionPersonal implements Comparator<Empleados> {
 		actualizacionContraseña(contraseña1);
 	}
 
+	 /**
+     * Actualiza la contraseña intermente en el caso de que sea jefe
+     *
+     * @param contraseñaNueva: la contraseña que se va a añadir
+     * 
+     * @return void
+     */
 	public void actualizacionContraseña(String contraseñaNueva) {
 
 		Jefe.getInstancia().setContraseña(contraseñaNueva);
 
-		try (BufferedWriter escritor = new BufferedWriter(new FileWriter(FICHERO_CONTRASEÑA))) {
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FICHERO_CONTRASEÑA))) {
 
-			escritor.write(contraseñaNueva);
+			bufferedWriter.write(contraseñaNueva);
 
 		} catch (IOException e) {
 
-			System.out.println("Error al actualizar la contraseña: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 
 		}
 	}
-
+	 
+	/**
+     * Añade un empleado a los datos para su guardado siempre que no este dentro mediante DNI
+     * En el caso de que tenga DNI hace un throw
+     *
+     * @param nuevoEmpleado: el empleado que se va a añadir
+     * 
+     * @return void
+     */
 	public void contratarEmpleado(Empleados nuevoEmpleado) throws EmpleadoContratadoException {
 
 		if (buscarEmpleado(nuevoEmpleado.getDni()) == null) {
@@ -109,6 +147,14 @@ public class GestionPersonal implements Comparator<Empleados> {
 
 	}
 
+	/**
+     * Despide un empleado buscandolo por su dni.
+     * En el caso de que no exista envia una excepcion
+     *
+     * @param dni: el dni del empleado que se va a despedir
+     * 
+     * @return void
+     */
 	public void despedirEmpleado(String dni) throws EmpleadoDespedidoException {
 
 		if (buscarEmpleado(dni) == null) {
@@ -122,7 +168,14 @@ public class GestionPersonal implements Comparator<Empleados> {
 		}
 
 	}
-
+	/**
+     * Devuelve un empleado segun el dni que se ingrese
+     *
+     * @param dni: el dni del empleado que se va a buscar
+     * 
+     * @return empleado: el empleado que se a encontrado, si no existe devolvera null
+     * 
+     *      */
 	public Empleados buscarEmpleado(String dni) {
 
 		return mapaEmpleados.get(dni);
@@ -130,6 +183,13 @@ public class GestionPersonal implements Comparator<Empleados> {
 	}
 
 	/*Codigo basado en video del canal de youtube de: "Johan Mora Code"*/
+	 /**
+     * filtra empleados segun si son estancia deTienda
+     *
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public void filtrarEmpleadosTiendaImprimir() {
 		
 	    List<Empleados> lista = mapaEmpleados.values().stream()
@@ -146,6 +206,13 @@ public class GestionPersonal implements Comparator<Empleados> {
 	}
 	
 	/*Codigo basado en video del canal de youtube de: "Johan Mora Code"*/
+	 /**
+     * filtra empleados segun si son estancia deAlmacen
+     *
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public void filtrarEmpleadosAlmacenImprimir() {
 		
 	    List<Empleados> lista = mapaEmpleados.values().stream()
@@ -160,7 +227,13 @@ public class GestionPersonal implements Comparator<Empleados> {
 	        
 	    }
 	}
-	
+	 /**
+     * Esta funcion imprime todos los empleados de manera ordenada
+     *
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public void imprimirTodosOrdenados() {
 
 		List<Empleados> listaOrdenada = ordenarPorDiasTrabajados();
@@ -179,31 +252,45 @@ public class GestionPersonal implements Comparator<Empleados> {
 			System.out.println(empleado.toString());
 		}
 	}
-
+	
+	 /**
+     * Esta funcion realiza un guardado de datos de empleados.
+     * Segun si es instancia de tienda o de almacen realizara un guardado u otro
+     *
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public void guardarDatosEmpleados() {
 
 		try (BufferedWriter bufferWriter = new BufferedWriter(new FileWriter(FICHERO_EMPLEADOS))) {
 
-			for (Empleados empleado : mapaEmpleados.values()) {
+			for (Empleados empleadoActual : mapaEmpleados.values()) {
 
-				if (empleado instanceof deTienda) {
+				if (empleadoActual instanceof deTienda) {
 
-					bufferWriter.write(lineaDeTienda((deTienda) empleado));
+					bufferWriter.write(lineaDeTienda((deTienda) empleadoActual));
 
-				} else if (empleado instanceof deAlmacen) {
+				} else if (empleadoActual instanceof deAlmacen) {
 
-					bufferWriter.write(lineaDeAlmacen((deAlmacen) empleado));
+					bufferWriter.write(lineaDeAlmacen((deAlmacen) empleadoActual));
 				}
 
 				bufferWriter.newLine();
 
 			}
 
-		} catch (IOException e) {
-			System.out.println("Error al guardar los empleados: " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error: " + e.getMessage());
 		}
 	}
-
+	 /**
+     * Esta funcion realiza la linea de guardado de tienda
+     *
+     * @param empleadoActual
+     * 
+     * @return lineaDeTienda: devuelve la linea de esta funcion.
+     */
 	private String lineaDeTienda(deTienda empleadoActual) {
 
 		/*
@@ -222,7 +309,13 @@ public class GestionPersonal implements Comparator<Empleados> {
 
 		return lineaActual;
 	}
-
+	 /**
+     * Esta funcion realiza la linea de guardado de almacen
+     *
+     * @param empleadoActual
+     * 
+     * @return lineaDeEmpleado: devuelve la linea de esta funcion.
+     */
 	private String lineaDeAlmacen(deAlmacen empleadoActual) {
 
 		/*
@@ -242,13 +335,21 @@ public class GestionPersonal implements Comparator<Empleados> {
 		return lineaActual;
 	}
 
+	 /**
+     * Esta funcion realiza una implementacion de datos de empleados .
+     * 
+     *
+     * @param Ninguno
+     * 
+     * @return void
+     */
 	public void implementarDatosEmpleados() {
 
-	    try (BufferedReader lector = new BufferedReader(new FileReader(FICHERO_EMPLEADOS))) {
+	    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FICHERO_EMPLEADOS))) {
 
 	        String lineaLeida;
 
-	        while ((lineaLeida = lector.readLine()) != null) {
+	        while ((lineaLeida = bufferedReader.readLine()) != null) {
 
 	            String[] datosDelEmpleado = lineaLeida.split(" - ");
 
@@ -266,18 +367,26 @@ public class GestionPersonal implements Comparator<Empleados> {
 	            }
 	        }
 
-	    } catch (IOException e) {
+	    } catch (Exception e) {
 
-	        System.out.println("Fallo al leer el fichero de empleados: " + e.getMessage());
+	        System.out.println("Error: " + e.getMessage());
 
 	    }
 	}
-
+	
+	 /**
+     * Esta funcion realiza una implementacion de datos de empleados .
+     * 
+     *
+     * @param datosConstructor: array con los datos de tienda para llamar a su constructor y añadirlo al mapa de empleddo
+     * 
+     * @return void
+     */
 	private void reconstruirDeTienda(String[] datosConstructor) {
 		try {
 			mapaEmpleados.put(datosConstructor[0], new deTienda(datosConstructor));
 		} catch (Exception e) {
-			System.out.println("Error! : " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 		}
 	}
 

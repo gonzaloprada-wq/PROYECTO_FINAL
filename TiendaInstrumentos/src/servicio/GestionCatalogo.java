@@ -20,9 +20,7 @@ import modelo.deViento;
 
 /*CLASE REALIZADA MEDIANTE TUTORIAL DE CANAL DE YOUTUBE: TodoCode*/
 /*
- * Clase abstracta que representa a un Instrumento del sistema.
- * Contiene los datos del instrumento
- * Es extendida por deCatalogo
+ * Clase que representa la gestion de un catalogo de instruments
  *
  * @author Gonzalo Prada
  * @version 1.0
@@ -192,9 +190,10 @@ public class GestionCatalogo {
  
 				.count();
 	}
- 
+	
+	// ---------------------------------------------------------------
 	// PERSISTENCIA
- 
+	// ---------------------------------------------------------------
 
 	 /**
     * 
@@ -322,13 +321,21 @@ public class GestionCatalogo {
  
 	// CARGA DE DATOS DEL FICHERO
  
+	 /**
+	    * Esta funcion implementa los datos del fichero de guardado en el sistema
+	    * Realiza distintos tipos de implementacion segun el instrumento que sea (deCuerda deViento dePercusion)
+	    *     
+	    * @param Ninguno
+	    * 
+	    * @return Void
+	    */
 	public void implementarDatosCatalogo() {
  
-		try (BufferedReader lector = new BufferedReader(new FileReader(FICHERO_CATALOGO))) {
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FICHERO_CATALOGO))) {
  
 			String linea;
  
-			while ((linea = lector.readLine()) != null) {
+			while ((linea = bufferedReader.readLine()) != null) {
  
 				String[] datos = linea.split(" - ");
  
@@ -355,7 +362,18 @@ public class GestionCatalogo {
  
 		}
 	}
- 
+	
+	 
+	 /**
+	    * 
+	    * Este metodo recibe un array con los datos de deCuerda
+	    * Estos datos se implementaran en un constructor de deCuerda y se creara dicha instancia
+	    * Tras esto pasara al hashmap para guardarse en la memoria
+	    *     
+	    * @param datos: un array con los datos de reconstruir cuerda
+	    * 
+	    * @return Void
+	    */
 	private void reconstruirDeCuerda(String[] datos) {
  
 		try {
@@ -392,11 +410,20 @@ public class GestionCatalogo {
  
 		} catch (Exception e) {
  
-			System.out.println("Error al reconstruir deCuerda: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
  
 		}
 	}
- 
+	 /**
+	    * 
+	    * Este metodo recibe un array con los datos de deViento
+	    * Estos datos se implementaran en un constructor de deViento y se creara dicha instancia
+	    * Tras esto pasara al hashmap para guardarse en la memoria
+	    *     
+	    * @param datos: un array con los datos de reconstruir viento
+	    * 
+	    * @return Void
+	    */
 	private void reconstruirDeViento(String[] datos) {
  
 		try {
@@ -430,11 +457,20 @@ public class GestionCatalogo {
  
 		} catch (Exception e) {
  
-			System.out.println("Error al reconstruir deViento: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
  
 		}
 	}
- 
+	 /**
+	    * 
+	    * Este metodo recibe un array con los datos de dePercusion
+	    * Estos datos se implementaran en un constructor de deViento y se creara dicha instancia
+	    * Tras esto pasara al hashmap para guardarse en la memoria
+	    *     
+	    * @param datos: un array con los datos de reconstruir percusion
+	    * 
+	    * @return Void
+	    */
 	private void reconstruirDePercusion(String[] datos) {
  
 		try {
@@ -469,7 +505,7 @@ public class GestionCatalogo {
  
 		} catch (Exception e) {
  
-			System.out.println("Error al reconstruir dePercusion: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
  
 		}
 	}

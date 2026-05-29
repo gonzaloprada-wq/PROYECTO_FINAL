@@ -1,27 +1,88 @@
-TO DO:
-------
-
-=====================================================================================
-11/05/26-He realizado el código de las clases Personal->Empleados->deTienda
-						                 ->deAlmacen
-						       ->Jefe
-
-PROXIMO DIA:
-
-12/05/26-Su clase gestora. 
-	-Realizar pruebas de la jerarquía personal
-	-JavaDoc y comentarios
 ====================================================================================
-12/05/26-He realizado código gestoria (incompleto)
+15/05/26-He investigado sobre subidas de notas y comenzado el código del inventario. También he creado la estructura inicial de las clases de artículos y catálogo.
 
 PROXIMO DIA:
-INVESTIGAR SINGLETON
-	-Terminar clase gestora. 
-	-Realizar pruebas de la jerarquía personal
-	-JavaDoc y comentarios
-====================================================================================
-14/05/26-He realizado todo el código y pruebas, además del javaDoc
+-Terminar jerarquía de artículos
+-Implementar validaciones
+-JavaDoc y comentarios
+======================
+
+16/05/26-He terminado la jerarquía de artículos y añadido herencia entre las clases del catálogo. También he realizado pruebas iniciales de funcionamiento.
 
 PROXIMO DIA:
-	-Investigar sobre subidas de notas
-	-Empezar Codigo de Inventario
+-Crear excepciones personalizadas
+-Implementar equals y hashCode
+-Realizar pruebas
+=================
+
+19/05/26-He implementado excepciones personalizadas y añadido validaciones en setters y métodos importantes. Además, he realizado pruebas de control de errores.
+
+PROXIMO DIA:
+-Empezar GestiónCatalogo
+-Investigar Streams
+-JavaDoc y comentarios
+======================
+
+20/05/26-He realizado gran parte de GestionCatalogo y añadido persistencia en ficheros mediante BufferedReader y BufferedWriter.
+
+PROXIMO DIA:
+-Terminar persistencia
+-Implementar Streams
+-Realizar pruebas
+=================
+
+21/05/26-He implementado Streams y expresiones lambda para filtros, ordenaciones y cálculos sobre colecciones. También he corregido errores encontrados en pruebas.
+
+PROXIMO DIA:
+-Crear GestionCatalogoPersonal
+-Implementar colecciones genéricas
+-JavaDoc y comentarios
+======================
+
+22/05/26-He implementado GestionCatalogoPersonal y la clase genérica Coleccion<T>. También he añadido la gestión de proveedores.
+
+PROXIMO DIA:
+-Implementar interfaces
+-Investigar Factory Method
+-Realizar pruebas
+=================
+
+23/05/26-He implementado interfaces y añadido la fábrica de empleados para crear objetos desde fichero automáticamente.
+
+PROXIMO DIA:
+-Investigar Singleton
+-Revisar herencia y polimorfismo
+-JavaDoc y comentarios
+======================
+
+26/05/26-He implementado el patrón Singleton en la clase Jefe y revisado toda la estructura de herencia y polimorfismo del proyecto.
+
+PROXIMO DIA:
+-Optimizar código
+-Realizar pruebas generales
+-Revisar persistencia
+=====================
+
+27/05/26-He realizado pruebas generales de funcionamiento y corregido errores en las gestoras y métodos principales.
+
+PROXIMO DIA:
+-Revisar Streams y colecciones
+-Mejorar mensajes de error
+-JavaDoc y comentarios
+======================
+
+28/05/26-He revisado y optimizado Streams, colecciones y métodos de ordenación. También he preparado la documentación técnica del proyecto.
+
+PROXIMO DIA:
+-Terminar documentación
+-Revisar JavaDoc
+-Preparar entrega
+=================
+
+29/05/26-He finalizado la documentación técnica, revisado el JavaDoc completo y realizado pruebas finales de funcionamiento del proyecto.
+
+PROXIMO DIA:
+-Entrega del proyecto
+-Última revisión general
+-Corrección de errores menores
+==============================

@@ -11,7 +11,7 @@ import modelo.Empleados;
 import modelo.deTienda;
 import servicio.GestionPersonal;
 
-/*
+/**
  * Clase UI para la gestion de empleados de Tienda.
  * Muestra el menu y delega en GestionPersonal.
  *
@@ -22,13 +22,13 @@ public class UIEmpleadosTienda {
 
     private final GestionPersonal gestionPersonal;
     
-    private final Scanner scanner;
+    private final Scanner reader;
 
     /*====================CONSTRUCTORES=======================================================*/
 
     public UIEmpleadosTienda(GestionPersonal gestionPersonal, Scanner scanner) {
         this.gestionPersonal = gestionPersonal;
-        this.scanner = scanner;
+        this.reader = scanner;
     }
 
     /*======================  FIN DE LOS CONSTRUCTORES  ======================================*/
@@ -55,7 +55,7 @@ public class UIEmpleadosTienda {
             System.out.println("========================================");
             System.out.print("Selecciona una opcion: ");
 
-            String opcion = scanner.nextLine().trim();
+            String opcion = reader.nextLine().trim();
 
             switch (opcion) {
             
@@ -114,7 +114,7 @@ public class UIEmpleadosTienda {
      */
     private void verTodosEmpleadosTienda() {
     	
-        System.out.println("\nEmpleados de Tienda");
+        System.out.println("Empleados de Tienda");
         
         gestionPersonal.filtrarEmpleadosTiendaImprimir();
         
@@ -128,98 +128,163 @@ public class UIEmpleadosTienda {
      * 
      */
     private void registrarVenta() {
+    	
         try {
+        	
             System.out.print("DNI del empleado: ");
-            String dni = scanner.nextLine().trim();
+            
+            String dni = reader.nextLine().trim();
 
             Empleados empleadoActual = gestionPersonal.buscarEmpleado(dni);
 
             if (empleadoActual == null) {
-                System.out.println("[!] No se encontro ningun empleado con ese DNI.");
-                return;
+            	
+                System.out.println("No se encontro ningun empleado con ese DNI.");
+                
+              
             }
 
             if (!(empleadoActual instanceof deTienda)) {
-                System.out.println("[!] El empleado encontrado no es de tienda.");
-                return;
+            	
+                System.out.println("El empleado encontrado no es de tienda.");
+                
+          
             }
 
             System.out.print("Precio del articulo vendido (€): ");
-            double precio = Double.parseDouble(scanner.nextLine().trim());
+            
+            double precio = Double.parseDouble(reader.nextLine().trim());
+            
 
             deTienda empleadoTienda = (deTienda) empleadoActual;
+            
             empleadoTienda.Incrementar(precio);
 
-            System.out.println("[OK] Venta registrada. Ventas totales: " + empleadoTienda.getNumeroVentas()
+            System.out.println("Venta registrada. Ventas totales: " + empleadoTienda.getNumeroVentas()
+            
                     + " | Dinero generado: " + empleadoTienda.getDineroVentas() + " €");
 
         } catch (NumberFormatException e) {
-            System.out.println("[!] Precio invalido: " + e.getMessage());
+        	
+            System.out.println("Precio invalido: " + e.getMessage());
+            
         } catch (Exception e) {
-            System.out.println("[!] Error inesperado: " + e.getMessage());
+        	
+            System.out.println("Error: " + e.getMessage());
+            
         }
     }
-
+    
+    /**
+     * Esto registra un bulto preguntando sobre el dni de empleado
+     * 
+     * @param ninguno
+     * 
+     * @return void
+     * 
+     */
     private void ficharEntrada() {
+    	
         try {
+        	
             System.out.print("DNI del empleado: ");
-            String dni = scanner.nextLine().trim();
+            
+            String dni = reader.nextLine().trim();
 
-            Empleados emp = gestionPersonal.buscarEmpleado(dni);
+            Empleados empleadoTienda = gestionPersonal.buscarEmpleado(dni);
 
-            if (emp == null) {
-                System.out.println("[!] No se encontro ningun empleado con ese DNI.");
-                return;
+            if (empleadoTienda == null) {
+            	
+                System.out.println("No se encontro ningun empleado con ese DNI.");
+                
+                
             }
 
-            emp.ficharEntrada();
-            System.out.println("[OK] Entrada registrada para " + emp.getNombre() + " " + emp.getApellido() + ".");
+            empleadoTienda.ficharEntrada();
+            
+            System.out.println("Entrada registrada para " + empleadoTienda.getNombre() + " " + empleadoTienda.getApellido());
 
         } catch (TrabajandoInvalidException e) {
-            System.out.println("[!] " + e.getMessage());
+        	
+            System.out.println(e.getMessage());
+            
         } catch (Exception e) {
-            System.out.println("[!] Error inesperado: " + e.getMessage());
+        	
+            System.out.println("Error: " + e.getMessage());
+            
         }
     }
 
+    
+    /**
+     * Esto crea el metodo de fichar salida, añadiendo un dia de trabajo cuando se fiche la salida
+     * 
+     * @param ninguno
+     * 
+     * @return void
+     * 
+     */
     private void ficharSalida() {
+    	
         try {
+        	
             System.out.print("DNI del empleado: ");
-            String dni = scanner.nextLine().trim();
+            
+            String dni = reader.nextLine().trim();
 
-            Empleados emp = gestionPersonal.buscarEmpleado(dni);
+            Empleados empleadoTienda = gestionPersonal.buscarEmpleado(dni);
 
-            if (emp == null) {
+            if (empleadoTienda == null) {
+            	
                 System.out.println("[!] No se encontro ningun empleado con ese DNI.");
-                return;
+                
+              
             }
 
-            emp.ficharSalida();
-            System.out.println("[OK] Salida registrada para " + emp.getNombre() + ". Dias trabajados: " + emp.getDiasTrabajados());
+            empleadoTienda.ficharSalida();
+            
+            System.out.println("Salida registrada para " + empleadoTienda.getNombre() + ". Dias trabajados: " + empleadoTienda.getDiasTrabajados());
 
         } catch (DescansandoInvalidException e) {
-            System.out.println("[!] " + e.getMessage());
+        	
+            System.out.println(e.getMessage());
+            
         } catch (Exception e) {
-            System.out.println("[!] Error inesperado: " + e.getMessage());
+        	
+            System.out.println("Error: " + e.getMessage());
+            
         }
     }
-
+    /**
+     * Esto imprime un string con los datos segun el trabajo que ha realizado dicho empleado
+     * 
+     * @param ninguno
+     * 
+     * @return void
+     * 
+     */
     private void verTrabajoRealizado() {
+    	
         try {
+        	
             System.out.print("DNI del empleado: ");
-            String dni = scanner.nextLine().trim();
+            
+            String dni = reader.nextLine().trim();
 
-            Empleados emp = gestionPersonal.buscarEmpleado(dni);
+            Empleados empleadoTienda = gestionPersonal.buscarEmpleado(dni);
 
-            if (emp == null) {
+            if (empleadoTienda == null) {
+            	
                 System.out.println("[!] No se encontro ningun empleado con ese DNI.");
-                return;
+                            
             }
 
-            emp.trabajoRealizado();
+            empleadoTienda.trabajoRealizado();
 
         } catch (Exception e) {
-            System.out.println("[!] Error inesperado: " + e.getMessage());
+        	
+            System.out.println("Error: " + e.getMessage());
+            
         }
     }
 }

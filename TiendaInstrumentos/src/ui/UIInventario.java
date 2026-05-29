@@ -5,7 +5,7 @@ import java.util.Scanner;
 import servicio.GestionCatalogo;
 import servicio.GestionCatalogoPersonal;
 
-/*
+/**
  * Clase UI para el menu principal de Inventario.
  * Delega en UICatalogo y UIInventarioPersonal.
  *

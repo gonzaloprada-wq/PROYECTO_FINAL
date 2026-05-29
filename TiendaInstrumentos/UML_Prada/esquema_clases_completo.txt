@@ -1,0 +1,508 @@
+================================================================================
+                    ESQUEMA COMPLETO DE ENTIDAD RELACIÓN DE CLASES
+================================================================================
+
+---------------------------
+Incrementable <<interface>>	  
+---------------------------
++ Incrementar(valor: double): void
+---------------------------
+
+
+---------------------------
+Bloqueable <<interface>>	  
+---------------------------
++ Bloquear(): void
+---------------------------
+
+
+================================================================================
+                           JERARQUÍA PERSONAL
+================================================================================
+
+----------------------------------
+Personal (clase abstracta)
+----------------------------------
+# dni: String
+# telefono: String
+# nombre: String
+# apellido: String
+# direccion: String
+----------------------------------
++ Personal(dni, telefono, nombre, apellido, direccion)
++ Personal(otro: Personal)
++ Personal()
++ getDni(): String
++ setDni(dni: String): void
++ getTelefono(): String
++ setTelefono(telefono: String): void
++ getNombre(): String
++ setNombre(nombre: String): void
++ getApellido(): String
++ setApellido(apellido: String): void
++ getDireccion(): String
++ setDireccion(direccion: String): void
++ abstract trabajoRealizado(): void
++ equals(obj: Object): boolean
++ hashCode(): int
++ toString(): String
+----------------------------------
+
+
+----------------------------------
+Jefe extends Personal (Singleton)
+----------------------------------
+- static instancia: Jefe
+- contraseña: String = "admin1234"
+----------------------------------
+- Jefe(dni, telefono, nombre, apellido, dir)
++ static getInstancia(dni, tel, nom, ap, dir): Jefe
++ static getInstancia(): Jefe
++ getContraseña(): String
++ setContraseña(contraseña: String): void
++ getNombreEmpresarial(): String
++ setNombreEmpresarial(nombreEmpresarial: String): void
++ trabajoRealizado(): void
+----------------------------------
+hereda:
++ getDni(), setDni(), getTelefono(), setTelefono()
++ getNombre(), setNombre(), getApellido(), setApellido()
++ getDireccion(), setDireccion(), equals(), hashCode(), toString()
+----------------------------------
+
+
+----------------------------------------------------------------------
+Empleados (clase abstracta) extends Personal implements Incrementable
+----------------------------------------------------------------------
+# tieneSeguro: boolean = false
+# diasDeVacacionesRestantes: int = 30
+# salarioBruto: double = 800
+# estaDePrueba: boolean = false
+# fechaInicio: String = "xx-xx-xxxx"
+# trabajando: boolean = true
+# diasTrabajados: int = 0
+------------------------------------------------------
++ isTieneSeguro(): boolean
++ setTieneSeguro(tieneSeguro: boolean): void
++ getDiasDeVacacionesRestantes(): int
++ setDiasDeVacacionesRestantes(dias: int): void
++ getSalarioBruto(): double
++ setSalarioBruto(salarioBruto: double): void
++ getEstaDePrueba(): boolean
++ setEstaDePrueba(estaDePrueba: boolean): void
++ getFechaInicio(): String
++ setFechaInicio(fechaInicio: String): void
++ getIsTrabajando(): boolean
++ setTrabajando(trabajando: boolean): void
++ getDiasTrabajados(): int
++ setDiasTrabajados(diasTrabajados: int): void
++ restarVacaciones(dias: int): void
++ ficharEntrada(): void
++ ficharSalida(): void
++ abstract Incrementar(valor: double): void
++ abstract trabajoRealizado(): void
++ toString(): void
+------------------------------------------------------
+hereda:
++ getDni(), setDni(), getTelefono(), setTelefono()
++ getNombre(), setNombre(), getApellido(), setApellido()
++ getDireccion(), setDireccion(), equals(), hashCode()
+------------------------------------------------------
+
+
+----------------------------------
+deTienda extends Empleados
+----------------------------------
+- numeroVentas: int = 0
+- dineroVentas: double = 0
+----------------------------------
++ deTienda(dni, tel, nom, ap, dir)
++ deTienda(datosFichero: String[])
++ deTienda()
++ getNumeroVentas(): int
++ setNumeroVentas(numeroVentas: int): void
++ getDineroVentas(): double
++ setDineroVentas(dineroVentas: double): void
++ trabajoRealizado(): void
++ Incrementar(precio: double): void
++ toString(): String
+----------------------------------
+hereda:
++ isTieneSeguro(), setTieneSeguro(), getDiasDeVacacionesRestantes()
++ setDiasDeVacacionesRestantes(), getSalarioBruto(), setSalarioBruto()
++ getEstaDePrueba(), setEstaDePrueba(), getFechaInicio(), setFechaInicio()
++ getIsTrabajando(), setTrabajando(), getDiasTrabajados(), setDiasTrabajados()
++ restarVacaciones(), ficharEntrada(), ficharSalida()
++ getDni(), setDni(), getTelefono(), setTelefono(), getNombre()
++ setNombre(), getApellido(), setApellido(), getDireccion(), setDireccion()
+----------------------------------
+
+
+----------------------------------
+deAlmacen extends Empleados
+----------------------------------
+- numeroBultos: int = 0
+- pesoCargado: double = 0
+----------------------------------
++ deAlmacen(dni, tel, nom, ap, dir)
++ deAlmacen(datosFichero: String[])
++ deAlmacen()
++ getNumeroBultos(): int
++ setNumeroBultos(numeroBultos: int): void
++ getPesoCargado(): double
++ setPesoCargado(pesoCargado: double): void
++ trabajoRealizado(): void
++ Incrementar(peso: double): void
+----------------------------------
+hereda:
++ isTieneSeguro(), setTieneSeguro(), getDiasDeVacacionesRestantes()
++ setDiasDeVacacionesRestantes(), getSalarioBruto(), setSalarioBruto()
++ getEstaDePrueba(), setEstaDePrueba(), getFechaInicio(), setFechaInicio()
++ getIsTrabajando(), setTrabajando(), getDiasTrabajados(), setDiasTrabajados()
++ restarVacaciones(), ficharEntrada(), ficharSalida(), toString()
++ getDni(), setDni(), getTelefono(), setTelefono(), getNombre()
++ setNombre(), getApellido(), setApellido(), getDireccion(), setDireccion()
+----------------------------------
+
+
+================================================================================
+                           JERARQUÍA ARTÍCULO
+================================================================================
+
+----------------------------------
+Articulo (clase abstracta)
+----------------------------------
+# serialNumber: String
+# marca: String
+# nombre: String
+# modelo: String
+# precio: Double
+# fechaAdquisicion: String
+# enCaja: Boolean
+----------------------------------
++ getSerialNumber(): String
++ setSerialNumber(serialNumber: String): void
++ getMarca(): String
++ setMarca(marca: String): void
++ getNombre(): String
++ setNombre(nombre: String): void
++ getModelo(): String
++ setModelo(modelo: String): void
++ getPrecio(): Double
++ setPrecio(precio: Double): void
++ getFechaAdquisicion(): String
++ setFechaAdquisicion(fechaAdquisicion: String): void
++ getEnCaja(): Boolean
++ setEnCaja(enCaja: Boolean): void
++ abstract imprimirLocalizacion(): void
++ equals(obj: Object): boolean
++ hashCode(): int
++ toString(): String
+----------------------------------
+
+
+----------------------------------
+dePersonal extends Articulo
+----------------------------------
+# nombreDueño: String
+----------------------------------
++ dePersonal(sn, marca, nombre, modelo, precio, fecha, enCaja, nombreDueño)
++ getNombreDueño(): String
++ setNombreDueño(nombreDueño: String): void
++ imprimirLocalizacion(): void
++ toString(): String
+----------------------------------
+hereda:
++ getSerialNumber(), setSerialNumber(), getMarca(), setMarca()
++ getNombre(), setNombre(), getModelo(), setModelo(), getPrecio()
++ setPrecio(), getFechaAdquisicion(), setFechaAdquisicion()
++ getEnCaja(), setEnCaja(), equals(), hashCode()
+----------------------------------
+
+
+----------------------------------
+deCatalogo (clase abstracta) extends Articulo
+----------------------------------
+# numeroAlmacen: int
+# numeroPalet: int
+# estaReservado: boolean = false
+----------------------------------
++ getNumeroAlmacen(): int
++ setNumeroAlmacen(numeroAlmacen: int): void
++ getNumeroPalet(): int
++ setNumeroPalet(numeroPalet: int): void
++ getEstaReservado(): boolean
++ setEstaReservado(estaReservado: boolean): void
++ imprimirFicha(): void
++ imprimirLocalizacion(): void
++ abstract imprimirAviso(): void
++ toString(): String
+----------------------------------
+hereda:
++ getSerialNumber(), setSerialNumber(), getMarca(), setMarca()
++ getNombre(), setNombre(), getModelo(), setModelo(), getPrecio()
++ setPrecio(), getFechaAdquisicion(), setFechaAdquisicion()
++ getEnCaja(), setEnCaja(), equals(), hashCode()
+----------------------------------
+
+
+----------------------------------
+Instrumento (clase abstracta) extends deCatalogo
+----------------------------------
+----------------------------------
++ Instrumento(sn, marca, nombre, modelo, precio, fecha, enCaja, numAlmacen, numPalet)
++ abstract imprimirAviso(): void
+----------------------------------
+hereda:
++ getNumeroAlmacen(), setNumeroAlmacen(), getNumeroPalet(), setNumeroPalet()
++ getEstaReservado(), setEstaReservado(), imprimirFicha(), imprimirLocalizacion()
++ toString(), getSerialNumber(), setSerialNumber(), getMarca(), setMarca()
++ getNombre(), setNombre(), getModelo(), setModelo(), getPrecio(), setPrecio()
+----------------------------------
+
+
+----------------------------------
+deCuerda extends Instrumento
+----------------------------------
+- numeroCuerdas: int
+- calibreCuerdas: double
+----------------------------------
++ deCuerda(numCuerdas, calibre)
++ getNumeroCuerdas(): int
++ setNumeroCuerdas(numeroCuerdas: int): void
++ getCalibreCuerdas(): double
++ setCalibreCuerdas(calibreCuerdas: double): void
++ imprimirAviso(): void
++ toString(): String
+----------------------------------
+hereda:
++ getNumeroAlmacen(), setNumeroAlmacen(), getNumeroPalet(), setNumeroPalet()
++ getEstaReservado(), setEstaReservado(), imprimirFicha(), imprimirLocalizacion()
++ getSerialNumber(), setSerialNumber(), getMarca(), setMarca(), getNombre()
++ setNombre(), getModelo(), setModelo(), getPrecio(), setPrecio()
+----------------------------------
+
+
+----------------------------------
+deViento extends Instrumento
+----------------------------------
+- material: String
+----------------------------------
++ deViento(material)
++ getMaterial(): String
++ setMaterial(material: String): void
++ imprimirAviso(): void
++ toString(): String
+----------------------------------
+hereda:
++ getNumeroAlmacen(), setNumeroAlmacen(), getNumeroPalet(), setNumeroPalet()
++ getEstaReservado(), setEstaReservado(), imprimirFicha(), imprimirLocalizacion()
++ getSerialNumber(), setSerialNumber(), getMarca(), setMarca(), getNombre()
++ setNombre(), getModelo(), setModelo(), getPrecio(), setPrecio()
+----------------------------------
+
+
+----------------------------------
+dePercusion extends Instrumento
+----------------------------------
+- necesitaBaqueta: boolean
+----------------------------------
++ dePercusion(necesitaBaqueta)
++ isNecesitaBaqueta(): boolean
++ setNecesitaBaqueta(necesitaBaqueta: boolean): void
++ imprimirAviso(): void
++ toString(): String
+----------------------------------
+hereda:
++ getNumeroAlmacen(), setNumeroAlmacen(), getNumeroPalet(), setNumeroPalet()
++ getEstaReservado(), setEstaReservado(), imprimirFicha(), imprimirLocalizacion()
++ getSerialNumber(), setSerialNumber(), getMarca(), setMarca(), getNombre()
++ setNombre(), getModelo(), setModelo(), getPrecio(), setPrecio()
+----------------------------------
+
+
+================================================================================
+                           PROVEEDOR
+================================================================================
+
+------------------------------------------------------
+Proveedor implements Bloqueable
+------------------------------------------------------
+- nombre: String
+- ubicacion: String
+- telefono: String
+- correoElectronico: String
+- bloqueado: Boolean = false
+------------------------------------------------------
++ Proveedor(nombre, telefono)
++ Proveedor(nombre, ubicacion, telefono, correo)
++ getNombre(): String
++ setNombre(nombre: String): void
++ getUbicacion(): String
++ setUbicacion(ubicacion: String): void
++ getTelefono(): String
++ setTelefono(telefono: String): void
++ getCorreElectronico(): String
++ setCorreElectronico(correoElectronico: String): void
++ Bloquear(): void
++ equals(obj: Object): boolean
++ hashCode(): int
++ toString(): String
+------------------------------------------------------
+
+
+================================================================================
+                    CAPA SERVICIO Y GESTIÓN (GESTORAS)
+================================================================================
+
+----------------------------------
+GestionPersonal
+----------------------------------
+- mapaEmpleados: LinkedHashMap<String, Empleados>
+- static final FICHERO_EMPLEADOS: String
+- static final FICHERO_CONTRASEÑA: String
+----------------------------------
++ getMapaEmpleados(): LinkedHashMap
++ setMapaEmpleados(): void
++ comprobarContraseña(): void
++ cambiarContraseña(): void
++ actualizacionContraseña(nueva: String): void
++ contratarEmpleado(empleado: Empleados): void
++ despedirEmpleado(dni: String): void
++ buscarEmpleado(dni: String): Empleados
++ filtrarEmpleadosTiendaImprimir(): void
++ filtrarEmpleadosAlmacenImprimir(): void
++ imprimirTodosOrdenados(): void
++ ordenarPorDiasTrabajados(): List<Empleados>
++ compare(e1: Empleados, e2: Empleados): int
++ guardarDatosEmpleados(): void
++ implementarDatosEmpleados(): void
+- lineaDeTienda(tienda: deTienda): String
+- lineaDeAlmacen(almacen: deAlmacen): String
+- reconstruirDeTienda(datos: String[]): void
+- reconstruirDeAlmacen(datos: String[]): void
+----------------------------------
+
+
+----------------------------------
+GestionCatalogo
+----------------------------------
+- mapaCatalogo: HashMap<String, deCatalogo>
+- static final FICHERO_CATALOGO: String
+----------------------------------
++ getMapaCatalogo(): HashMap
++ setMapaCatalogo(): void
++ añadirArticulo(articulo: deCatalogo): void
++ eliminarArticulo(sn: String): void
++ buscarArticulo(sn: String): deCatalogo
++ imprimirTodos(): void
++ imprimirDisponibles(): void
++ obtenerMasCaro(): void
++ contarDisponibles(): Long
++ guardarDatosCatalogo(): void
++ implementarDatosCatalogo(): void
+- datosComunes(articulo: deCatalogo, tipo: String): String
+- lineaDeCuerda(): String
+- lineaDeViento(): String
+- lineaDePercusion(): String
+- reconstruirDeCuerda(datos: String[]): void
+- reconstruirDeViento(datos: String[]): void
+- reconstruirDePercusion(datos: String[]): void
+----------------------------------
+
+
+----------------------------------
+GestionCatalogoPersonal
+----------------------------------
+- listadelPersonal: ArrayList<dePersonal>
+- static final FICHERO_PERSONAL: String
+----------------------------------
++ getListaPersonal(): ArrayList
++ setListaPersonal(): void
++ añadirArticulo(articulo: dePersonal): void
++ eliminarArticulo(sn: String): void
++ buscarArticulo(sn: String): dePersonal
++ imprimirTodos(): void
++ calcularPrecioTotal(): double
++ guardarDatosPersonal(): void
++ implementarDatosPersonal(): void
+- lineaDePersonal(personal: dePersonal): String
+- reconstruirDePersonal(datos: String[]): void
+----------------------------------
+
+
+----------------------------------
+Coleccion<T> (Clase Genérica)
+----------------------------------
+- listaGenerica: ArrayList<T>
+----------------------------------
++ añadir(elemento: T): void
++ eliminar(elemento: T): void
++ getLista(): ArrayList<T>
++ contar(): int
+----------------------------------
+
+
+----------------------------------
+GestionProveedores extends Coleccion<Proveedor>
+----------------------------------
+- final FICHERO_PROVEEDORES: String
+----------------------------------
++ buscarProveedor(nombre: String): Proveedor
++ imprimirTodos(): void
++ implementarDatosProveedores(): void
++ guardarDatosProveedores(): void
+- reconstruirProveedor(datos: String[]): void
+- lineaDeProveedor(proveedor: Proveedor): String
+----------------------------------
+hereda:
++ añadir(elemento: Proveedor): void
++ eliminar(elemento: Proveedor): void
++ getLista(): ArrayList<Proveedor>
++ contar(): int
+----------------------------------
+
+
+----------------------------------
+FabricaEmpleados (Patrón Factory)
+----------------------------------
+----------------------------------
++ static crear(datos: String[]): Empleados
+----------------------------------
+
+
+================================================================================
+                    EXCEPCIONES (extends Exception)
+================================================================================
+
+----------------------------------
+DniLongitudInvalidaException extends Exception
+----------------------------------
+
+----------------------------------
+TlfLongitudInvalidaException extends Exception
+----------------------------------
+
+----------------------------------
+ContrasenaInvalidaException extends Exception
+----------------------------------
+
+----------------------------------
+EmpleadoContratadoException extends Exception
+----------------------------------
+
+----------------------------------
+EmpleadoDespedidoException extends Exception
+----------------------------------
+
+----------------------------------
+TrabajandoInvalidException extends Exception
+----------------------------------
+
+----------------------------------
+DescansandoInvalidException extends Exception
+----------------------------------
+
+----------------------------------
+ProveedorBloqueadoException extends Exception
+----------------------------------

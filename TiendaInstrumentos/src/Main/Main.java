@@ -32,7 +32,7 @@ public class Main {
 		//Se debe crear un jefe al principio, si no el proyecto no arrancara
 		if (jefe == null) {
 			
-			System.out.println("[FATAL] No se pudo inicializar el jefe. Cerrando aplicacion.");
+			System.out.println("No se pudo inicializar el jefe. Cerrando aplicacion.");
 	
 		}
 
@@ -164,7 +164,7 @@ public class Main {
 			
 			java.io.BufferedReader bufferedReader = new java.io.BufferedReader(
 					
-					new java.io.FileReader("/recursos/contraseña.txt"));
+					new java.io.FileReader("recursos/contraseña.txt"));
 			
 			String contraseña = bufferedReader.readLine();
 			
